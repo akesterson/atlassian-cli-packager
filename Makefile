@@ -22,6 +22,7 @@ dist: atlassian-cli
 	cd atlassian-cli && tar -czf ../dist/atlassian-cli-$${MAJOR}-$${MINOR}.tar.gz .
 
 rpm: version.sh dist
+	mock --scrub=all -r ${TARGET}
 	mkdir -p dist/
 	source version.sh ; \
 	mock --buildsrpm --spec rpm.spec --sources ./dist/ --resultdir ./dist/ --define "version $${MAJOR}" --define "release $${MINOR}" ; \
